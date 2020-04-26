@@ -1320,7 +1320,6 @@ Perry Stanislas
 1st ed.
 2019 http://link.springer.com/openurl?genre=book&isbn=978-1-4939-9621-6'''.split()
 
-import re
 import requests
 from bs4 import BeautifulSoup
 import lxml
@@ -1346,8 +1345,6 @@ for url in only_urls:
 
         print(f'---- Downloading {book_name}{subtitle} ({author}) ----')
 
-
-
         try:
             pdf_url = 'https://link.springer.com' + soup.find('a', class_='test-bookpdf-link')['href']
             print(f'Attempting to download pdf from {pdf_url}')
@@ -1360,9 +1357,6 @@ for url in only_urls:
                 print(f'No pdf file or {book_name}, skipping ({myfile.status_code})')
         except:
             print(f'No pdf file or {book_name}, skipping ({myfile.status_code})')
-
-
-
 
         try:
             epub_url = 'https://link.springer.com' + soup.find('a', class_='test-bookepub-link')['href']
