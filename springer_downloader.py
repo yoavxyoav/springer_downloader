@@ -1336,21 +1336,21 @@ for url in only_urls:
         html = requests.get(url).text
         soup = BeautifulSoup(html)
         book_name = soup.find('div', class_='page-title').text.strip('\n').replace('\n', '   ')
-        try:
-            subtitle = soup.find('h2', class_='page-title__subtitle').text.strip('\n').replace('\n', '   ')
-            subtitle = ' - ' + subtitle
-        except:
-            subtitle = ''
+        # try:
+        #     subtitle = soup.find('h2', class_='page-title__subtitle').text.strip('\n').replace('\n', '   ')
+        #     subtitle = ' - ' + subtitle
+        # except:
+        #     subtitle = ''
         author =  soup.find('span', class_='authors__name').text.strip('\n').replace('\n', '   ')
 
-        print(f'---- Downloading {book_name}{subtitle} ({author}) ----')
+        print(f'---- Downloading {book_name} ({author}) ----')
 
         try:
             pdf_url = 'https://link.springer.com' + soup.find('a', class_='test-bookpdf-link')['href']
             print(f'Attempting to download pdf from {pdf_url}')
             myfile = requests.get(pdf_url, stream=True)
             if myfile.status_code == 200:
-                with open(f'{book_name}{subtitle} ({author}).pdf', 'wb') as f:
+                with open(f'{book_name}  ({author}).pdf', 'wb') as f:
                     f.write(myfile.content)
                     print('Done!')
             else:
@@ -1363,7 +1363,7 @@ for url in only_urls:
             print(f'Attempting to download pdf from {epub_url}')
             myfile = requests.get(epub_url, stream=True)
             if myfile.status_code == 200:
-                with open(f'{book_name}{subtitle} ({author}).epub', 'wb') as f:
+                with open(f'{book_name}  ({author}).epub', 'wb') as f:
                     f.write(myfile.content)
                     print('Done!')
             else:
